@@ -32,7 +32,7 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v${VERS}/
 # Generate Golang protobuf files
 RUN protoc \
     --proto_path=./protos \
-    --go_out=./hello --go-grpc_out=./hello \
+    --go_out=. --go-grpc_out=. \
     ./protos/hello.proto
 
 # Build the server
