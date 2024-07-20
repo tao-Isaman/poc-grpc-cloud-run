@@ -47,17 +47,8 @@ RUN CGO_ENABLED=0 GOOS=linux \
     -o /go/bin/client \
     ./client
 
-# Stage 2: Create a minimal runtime image
-FROM gcr.io/distroless/base-debian10
+FROM scratch
 
-# Copy the built server binary from the build stage
 COPY --from=build /go/bin/server /server
-
-# Copy the built client binary from the build stage (optional)
-COPY --from=build /go/bin/client /client
-
-# Expose the port the server will run on
-EXPOSE 50051
-
-# Set the entrypoint to the server binary
+    
 ENTRYPOINT ["/server"]
